@@ -40,9 +40,11 @@ if __name__ == "__main__":
     done_tasks = [task for task in todos if task.get("completed") is True]
     number_of_done_tasks = len(done_tasks)
 
-    # Print progress line
-    print("Employee {} is done with tasks({}/{}):".format(
-        employee_name, number_of_done_tasks, total_tasks))
+        print("Employee {} is done with tasks({}/{}):".format(
+        employee_name,
+        number_of_done_tasks,
+        total_tasks
+    ))
 
     # Print titles of completed tasks
     for task in done_tasks:
