@@ -20,7 +20,9 @@ if __name__ == "__main__":
         print("Employee ID must be an integer.")
         sys.exit(1)
 
-    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    user_url = (
+        f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    )
     todos_url = "https://jsonplaceholder.typicode.com/todos"
 
     # Fetch user data
@@ -32,7 +34,11 @@ if __name__ == "__main__":
     employee_username = user_response.json().get("username")
 
     # Fetch TODOs for the employee only
-    todos_response = requests.get(todos_url, params={"userId": employee_id}, timeout=10)
+    todos_response = requests.get(
+        todos_url,
+        params={"userId": employee_id},
+        timeout=10
+    )
     if todos_response.status_code != 200:
         print("Failed to fetch TODOs.")
         sys.exit(1)
