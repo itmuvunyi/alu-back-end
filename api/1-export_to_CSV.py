@@ -21,7 +21,11 @@ if __name__ == "__main__":
         sys.exit(1)
 
     user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+    todos_url = "https://jsonplaceholder.typicode.com/todos"
+    todos_response = requests.get(
+        todos_url, params={"userId": employee_id}, timeout=10
+    )
+    todos = todos_response.json()
 
     # Fetch user data
     user_response = requests.get(user_url)
