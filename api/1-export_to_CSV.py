@@ -22,21 +22,19 @@ if __name__ == "__main__":
 
     user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
     todos_url = "https://jsonplaceholder.typicode.com/todos"
-    todos_response = requests.get(
-        todos_url, params={"userId": employee_id}, timeout=10
-    )
-    todos = todos_response.json()
 
     # Fetch user data
-    user_response = requests.get(user_url)
+    user_response = requests.get(user_url, timeout=10)
     if user_response.status_code != 200:
         print("Employee not found.")
         sys.exit(1)
 
     employee_username = user_response.json().get("username")
 
-    # Fetch TODOs
-    todos_response = requests.get(todos_url)
+    # Fetch TODOs for that user only
+    todos_response = requests.get(
+        todos_url, params={"userId": employee_id}, timeout=10
+    )
     todos = todos_response.json()
 
     # Write to CSV file
