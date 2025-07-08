@@ -21,18 +21,22 @@ if __name__ == "__main__":
         sys.exit(1)
 
     user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
+    todos_url = "https://jsonplaceholder.typicode.com/todos"
 
     # Fetch user data
-    user_response = requests.get(user_url)
+    user_response = requests.get(user_url, timeout=10)
     if user_response.status_code != 200:
         print("Employee not found.")
         sys.exit(1)
 
     employee_username = user_response.json().get("username")
 
-    # Fetch TODOs
-    todos_response = requests.get(todos_url)
+    # Fetch TODOs for the employee only
+    todos_response = requests.get(todos_url, params={"userId": employee_id}, timeout=10)
+    if todos_response.status_code != 200:
+        print("Failed to fetch TODOs.")
+        sys.exit(1)
+
     todos = todos_response.json()
 
     # Build JSON data structure
@@ -50,4 +54,4 @@ if __name__ == "__main__":
     # Write to JSON file
     json_filename = f"{employee_id}.json"
     with open(json_filename, mode="w") as json_file:
-        json.dump(data, json_file)
+        json.dump(data, json_file, indent=4)
