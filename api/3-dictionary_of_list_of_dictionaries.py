@@ -32,7 +32,9 @@ def fetch_data(url: str) -> List[Dict[str, Any]]:
         return []
 
 
-def export_tasks_to_json(filename: str, data: Dict[int, List[Dict[str, Any]]]) -> None:
+def export_tasks_to_json(
+    filename: str, data: Dict[int, List[Dict[str, Any]]]
+) -> None:
     """
     Exports the provided data to a JSON file.
 
@@ -69,7 +71,8 @@ def main() -> None:
                 "task": todo.get("title"),
                 "completed": todo.get("completed"),
             }
-            for todo in todos if todo.get("userId") == user_id
+            for todo in todos
+            if todo.get("userId") == user_id
         ]
 
         all_tasks[user_id] = user_tasks
