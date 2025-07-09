@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Fetches tasks for all employees from a REST API and exports them to a JSON file.
+Fetches tasks for all employees from a REST API and exports them to
+a JSON file.
 """
 
 import json
@@ -39,7 +40,7 @@ def main():
                 task_data = {
                     "username": username,
                     "task": todo.get("title"),
-                    "completed": todo.get("completed")
+                    "completed": todo.get("completed"),
                 }
                 user_tasks.append(task_data)
 
@@ -47,6 +48,7 @@ def main():
 
     with open("todo_all_employees.json", "w", encoding="utf-8") as jsonfile:
         json.dump(all_tasks, jsonfile)
+
 
 if __name__ == "__main__":
     main()
